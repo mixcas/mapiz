@@ -1,5 +1,5 @@
 import {  RouterProvider, createBrowserRouter } from "react-router-dom";
-
+import Button from '@mui/material/Button';
 
 import './App.css'
 
@@ -27,7 +27,7 @@ const router = createBrowserRouter([
     element: 'admin',
   }, {
     path: "/",
-    element: 'home',
+    element: <Button variant="contained">Hello world</Button>
   },
 ]);
 
