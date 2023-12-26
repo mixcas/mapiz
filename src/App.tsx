@@ -2,6 +2,7 @@ import {  RouterProvider, createBrowserRouter } from "react-router-dom";
 import Button from '@mui/material/Button';
 
 import Admin from './routes/admin/Admin';
+import Login from './routes/login/Login';
 
 import './App.css'
 
@@ -11,19 +12,10 @@ const router = createBrowserRouter([
     element: `evento`,
   }, {
     path: "login",
-    element: 'login',
+    element: <Login />
   }, {
     path: "archivo",
     element: `archivo`,
-  // }, {
-  //   path: "/admin/eventos",
-  //   element: 'admin - eventos',
-  // }, {
-  //   path: "/admin/evento/:eventId",
-  //   element: `admin - evento`,
-  // }, {
-  //   path: "/admin/usuarios",
-  //   element: `admin - usuarios`,
   }, {
     path: "/admin/",
     element: <Admin />,

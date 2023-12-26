@@ -4,18 +4,19 @@ import Container from '@mui/material/Container';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
-// import './App.css'
+import Sidebar from './components/Sidebar';
 
+// import './App.css'
 
 const Admin = () => {
   return (
     <>
       <AppBar
-        position="absolute"
+        position="fixed"
         color="default"
         elevation={0}
         sx={{
-          position: 'relative',
+          zIndex: (theme) => theme.zIndex.drawer + 1,
           borderBottom: (t) => `1px solid ${t.palette.divider}`,
         }}
       >
@@ -26,6 +27,7 @@ const Admin = () => {
         </Toolbar>
       </AppBar>
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
+        <Sidebar />
         <Outlet />
       </Container>
     </>
