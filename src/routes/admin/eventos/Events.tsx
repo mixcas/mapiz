@@ -26,14 +26,18 @@ const Events = () => {
     return 'Loading';
   }
 
-  return (
-    <DataGrid
-      columns={EVENT_COLUMNS}
-      rows={events}
-      loading={loading}
-      getRowId={item => item.name}
-    />
-  )
+  if (events) {
+    return (
+      <DataGrid
+        columns={EVENT_COLUMNS}
+        rows={events}
+        loading={loading}
+        getRowId={item => item.name}
+      />
+    );
+  }
+
+  return '';
 };
 
 export default Events;
