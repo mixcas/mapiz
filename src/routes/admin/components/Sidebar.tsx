@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
@@ -16,25 +17,30 @@ const drawerWidth = 240;
 const eventsList = [
   {
     label: 'Eventos',
-    icon: <CalendarMonthIcon />
+    route: 'eventos',
+    icon: <CalendarMonthIcon />,
   }, {
     label: 'Nuevo Evento',
-    icon: <AddBoxIcon />
+    route: 'evento/crear',
+    icon: <AddBoxIcon />,
   }
 ];
 
 const adminList = [
   {
     label: 'Usuarios',
-    icon: <GroupIcon />
+    route: 'usuarios',
+    icon: <GroupIcon />,
   }
 ]
 
 const Sidebar = () => {
+  const navigate = useNavigate();
+
   return (
     <Drawer
       variant="permanent"
-      open
+      anchor="left"
       sx={{
         width: drawerWidth,
         flexShrink: 0,
@@ -46,7 +52,7 @@ const Sidebar = () => {
         <List>
           {eventsList.map((item) => (
             <ListItem key={item.label} disablePadding>
-              <ListItemButton>
+              <ListItemButton onClick={() => navigate(item.route)}>
                 <ListItemIcon>
                   {item.icon}
                 </ListItemIcon>
@@ -59,7 +65,7 @@ const Sidebar = () => {
         <List>
           {adminList.map((item) => (
             <ListItem key={item.label} disablePadding>
-              <ListItemButton>
+              <ListItemButton onClick={() => navigate(item.route)}>
                 <ListItemIcon>
                   {item.icon}
                 </ListItemIcon>

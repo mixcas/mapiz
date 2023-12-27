@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { useAuthState, useDocumentData } from 'react-firebase-hooks/auth';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { getAuth } from 'firebase/auth';
 import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -36,7 +37,7 @@ const Admin = () => {
   }
 
   return (
-    <>
+    <Box sx={{ display: 'flex' }}>
       <AppBar
         position="fixed"
         color="default"
@@ -52,11 +53,19 @@ const Admin = () => {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
-        <Sidebar />
-        <Outlet />
+      <Sidebar />
+      <Container component="main">
+        <Box
+          sx={{
+            marginTop: (theme) => theme.spacing(1),
+            marginBottom: (theme) => theme.spacing(1),
+          }}
+        >
+          <Toolbar />
+          <Outlet />
+        </Box>
       </Container>
-    </>
+    </Box>
   )
 };
 

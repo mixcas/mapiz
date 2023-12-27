@@ -3,6 +3,7 @@ import Button from '@mui/material/Button';
 
 import Admin from './routes/admin/Admin';
 import Login from './routes/login/Login';
+import Events from './routes/admin/eventos/Events';
 
 import './App.css'
 
@@ -22,10 +23,13 @@ const router = createBrowserRouter([
     children: [
       {
         path: "eventos",
-        element: 'admin - eventos',
+        element: <Events />
       }, {
         path: "evento/:eventId",
         element: `admin - evento`,
+      }, {
+        path: "evento/crear",
+        element: `admin - evento - crear`,
       }, {
         path: "usuarios",
         element: `admin - usuarios`,
