@@ -1,29 +1,72 @@
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { getAuth } from 'firebase/auth';
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+import LoadingButton from '@mui/lab/LoadingButton';
+
+import firebase from '~/firebase';
+
+const auth = getAuth(firebase);
 
 const Login = () => {
+  const navigate = useNavigate();
+  const [
+    signInWithEmailAndPassword,
+    user,
+    loading,
+    error,
+  ] = useSignInWithEmailAndPassword(auth);
+
+  console.log({ user, loading, error });
+
+  const handleSignIn = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const email = data.get('email');
+    const password = data.get('password');
+
+    console.log({
+      email,
+      password,
+    });
+
+    signInWithEmailAndPassword(email, password);
+  };
+
+  useEffect(() => {
+    if (user) {
+      // TODO, add redirectUrl
+      navigate('/admin');
+    }
+  }, [user]);
+
   return (
-    <Container component="main" maxWidth="xs">
+    <Container 
+      component="main" 
+      maxWidth="xs"
+      sx={{
+        marginTop: (theme) => theme.spacing(3),
+        marginBottom: (theme) => theme.spacing(3),
+      }}
+    >
       <Typography component="h1" variant="h5">
         Log in
       </Typography>
-      <Box component="form" onSubmit={() => {}} noValidate sx={{ mt: 1 }}>
+      <Box component="form" onSubmit={handleSignIn} noValidate sx={{ mt: 1 }}>
         <TextField
           margin="normal"
           required
           fullWidth
           id="email"
-          label="Email Address"
+          label="Email"
           name="email"
           autoComplete="email"
           autoFocus
+          disabled={loading}
         />
         <TextField
           margin="normal"
@@ -34,31 +77,17 @@ const Login = () => {
           type="password"
           id="password"
           autoComplete="current-password"
+          disabled={loading}
         />
-        <FormControlLabel
-          control={<Checkbox value="remember" color="primary" />}
-          label="Remember me"
-        />
-        <Button
+        <LoadingButton 
+          loading={loading}
           type="submit"
           fullWidth
           variant="contained"
           sx={{ mt: 3, mb: 2 }}
         >
-          Sign In
-        </Button>
-        <Grid container>
-          <Grid item xs>
-            <Link href="#" variant="body2">
-              Forgot password?
-            </Link>
-          </Grid>
-          <Grid item>
-            <Link href="#" variant="body2">
-              {"Don't have an account? Sign Up"}
-            </Link>
-          </Grid>
-        </Grid>
+          Entrar
+        </LoadingButton>
       </Box>
     </Container>
   );
