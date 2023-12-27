@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { useAuthState } from 'react-firebase-hooks/auth';
+import { useAuthState, useDocumentData } from 'react-firebase-hooks/auth';
 import { getAuth } from 'firebase/auth';
 import AppBar from '@mui/material/AppBar';
 import Container from '@mui/material/Container';
@@ -23,12 +23,12 @@ const Admin = () => {
 
   console.log(user);
 
-
   useEffect(() => {
     if (!loading && !user) {
       // TODO, add redirectUrl
       navigate('/login');
     }
+    // TODO, check user role
   }, [user, loading]);
 
   if (loading || !user) {
