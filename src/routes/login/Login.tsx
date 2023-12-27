@@ -34,7 +34,14 @@ const Login = () => {
       password,
     });
 
-    signInWithEmailAndPassword(email, password);
+    if (
+      email
+      && password
+      && typeof email === 'string' 
+      && typeof password === 'string'
+    ) {
+      signInWithEmailAndPassword(email, password);
+    }
   };
 
   useEffect(() => {
@@ -42,7 +49,7 @@ const Login = () => {
       // TODO, add redirectUrl
       navigate('/admin');
     }
-  }, [user]);
+  }, [user, navigate]);
 
   return (
     <Container 

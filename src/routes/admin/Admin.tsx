@@ -30,7 +30,7 @@ const Admin = () => {
       navigate('/login');
     }
     // TODO, check user role
-  }, [user, loading]);
+  }, [user, loading, navigate]);
 
   if (loading || !user) {
     return <FullScreenLoader />
